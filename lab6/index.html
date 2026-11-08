@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акустична варта — Система класів моніторингу (Лабораторна №5)</title>
+    <link rel="stylesheet" href="./scss/main.css">
+    <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <div class="header__brand">
+                <h1>Акустична варта</h1>
+                <p>Професійний моніторинг шумового забруднення міських територій</p>
+            </div>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#about">Про компанію</a></li>
+                    <li><a href="#sensors-network">Мережа датчиків</a></li>
+                    <li><a href="#services">Напрямки роботи</a></li>
+                    <li><a href="#order">Замовити</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="active-sensors"> 
+  <h2>Активні сенсори</h2> 
+  <div class="sensor-filters"> 
+    <label> 
+      Район 
+      <select id="district-filter"> 
+        <option value="all">Усі райони</option> 
+        <option value="Галицький">Галицький</option> 
+        <option value="Франківський">Франківський</option> 
+        <option value="Шевченківський">Шевченківський</option> 
+      </select> 
+    </label> 
+    <label> 
+      <input type="checkbox" id="critical-filter"> 
+      Тільки критичні 
+    </label> 
+  </div> 
+  <div class="sensor-list"></div> 
+</section>
+
+    <main class="container main-layout">
+        <section id="about" class="card hero-card">
+            <div class="hero-card__content">
+                <h2>Хто ми?</h2>
+                <p>Ми встановлюємо акустичні датчики, проводимо вимірювання рівня шуму та формуємо детальні звіти в реальному часі на базі об'єктно-орієнтованої системи моніторингу.</p>
+            </div>
+            <div class="hero-card__icon">📡</div>
+        </section>
+
+        <!-- Секція Лабораторної роботи №5: Мережа датчиків MonitoringSystem -->
+        <section id="sensors-network" class="card status-card">
+            <h2>Мережа акустичних датчиків міста</h2>
+            <p id="system-summary" class="status-card__meta">Завантаження даних системи моніторингу...</p>
+
+            <div class="controls-bar">
+                <label for="district-filter">Фільтр за районом:</label>
+                <select id="district-filter">
+                    <option value="all">Усі райони</option>
+                    <option value="Галицький">Галицький</option>
+                    <option value="Франківський">Франківський</option>
+                    <option value="Шевченківський">Шевченківський</option>
+                    <option value="Личаківський">Личаківський</option>
+                </select>
+            </div>
+
+            <!-- Контейнер для динамічних карток NoiseSensor -->
+            <div id="sensors-grid" class="services-grid"></div>
+
+            <!-- Форма додавання нового вимірювання (NoiseMeasurement) -->
+            <div class="measurement-panel">
+                <h3>Додати нове вимірювання датчику</h3>
+                <form id="add-measurement-form" class="order-form">
+                    <select id="measurement-sensor-id" required></select>
+                    <input type="number" id="measurement-value" placeholder="Новий рівень шуму (0 - 200 dB)" min="0" max="200" step="1" required>
+                    <button type="submit">Оновити вимірювання</button>
+                </form>
+                <p id="measurement-feedback" class="feedback-msg"></p>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <h2>Напрямки роботи</h2>
+            <div class="services-grid">
+                <article class="card service-item">
+                    <h3>Житлові комплекси</h3>
+                    <p>Аналіз шуму від доріг та інфраструктури.</p>
+                </article>
+                <article class="card service-item">
+                    <h3>Офісні центри</h3>
+                    <p>Оцінка акустичного комфорту для працівників.</p>
+                </article>
+                <article class="card service-item">
+                    <h3>Масові заходи</h3>
+                    <p>Контроль звукового тиску на фестивалях.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="order" class="card order-section">
+            <h2>Замовити дослідження</h2>
+            <form class="order-form" action="#" method="post">
+                <input type="text" placeholder="Ваше ім'я" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="text" placeholder="Адреса або об'єкт моніторингу" required>
+                <button type="submit">Надіслати заявку</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p>Акустична варта &copy; 2026</p>
+            <p>Контакти: info@acoustic-guard.ua | +380441234567</p>
+        </div>
+    </footer>
+</body>
+</html>
