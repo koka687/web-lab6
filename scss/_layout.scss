@@ -1,0 +1,88 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+header {
+    background: rgba(24, 24, 27, 0.7);
+    backdrop-filter: blur(12px); 
+    border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+    padding: v.$space-lg 20px;
+    border-radius: 0 0 v.$radius-lg v.$radius-lg;
+    margin-bottom: 40px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+
+    @include m.respond-to(v.$bp-tablet) {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: 
+            "title nav"
+            "desc nav";
+        text-align: left;
+        align-items: center;
+        gap: 5px 40px;
+    }
+
+    h1 {
+        grid-area: title;
+        font-size: 2.8rem;
+        letter-spacing: -1px;
+    }
+
+    p {
+        grid-area: desc;
+        color: v.$color-text;
+    }
+}
+
+nav {
+    grid-area: nav;
+    
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        @include m.respond-to(v.$bp-tablet) {
+            flex-direction: row;
+        }
+    }
+
+    a {
+        color: v.$color-primary;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 8px 16px;
+        border-radius: v.$radius-md;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+
+        &:hover {
+            color: v.$color-accent;
+            border-color: v.$color-accent;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3) inset;
+        }
+    }
+}
+
+footer {
+    background-color: v.$color-surface;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: v.$space-lg 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    @include m.respond-to(v.$bp-tablet) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

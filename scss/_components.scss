@@ -1,0 +1,291 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+#services {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$space-md;
+
+    h2 { grid-column: 1 / -1; }
+
+    @include m.respond-to(v.$bp-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include m.respond-to(v.$bp-desktop) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: v.$color-surface;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: v.$radius-md;
+    padding: v.$space-md;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: v.$color-accent;
+        opacity: 0.5;
+        transition: opacity 0.4s ease;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        background-color: lighten(#18181b, 2%);
+        border-color: rgba(6, 182, 212, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(6, 182, 212, 0.1);
+        
+        &::before { opacity: 1; box-shadow: 0 0 10px v.$color-accent; }
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: v.$color-primary;
+    }
+}
+
+aside.warning {
+    position: relative;
+    background-color: v.$color-warning;
+    border: 1px solid #78350f;
+    border-left: 4px solid #f59e0b;
+    padding: v.$space-md v.$space-md v.$space-md 60px;
+    border-radius: v.$radius-md;
+    width: 100%;
+    margin-bottom: 40px;
+
+    h3 { color: #fcd34d; margin-bottom: 5px; }
+    p { color: #fef3c7; }
+}
+
+.status-badge {
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    background-color: v.$color-danger;
+    color: v.$color-primary;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+#order form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    background-color: v.$color-surface;
+    padding: v.$space-lg;
+    border-radius: v.$radius-md;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    @include m.respond-to(v.$bp-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start;
+    }
+}
+
+form label {
+    font-weight: 600;
+    color: v.$color-primary;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 14px;
+    background-color: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: v.$color-primary;
+    border-radius: v.$radius-sm;
+    font-family: inherit;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: none;
+        border-color: v.$color-accent;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+    }
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    @include m.respond-to(v.$bp-tablet) {
+        grid-column: 1 / -1;
+    }
+}
+
+.btn {
+    background-color: v.$color-accent;
+    color: #000;
+    padding: 16px 32px;
+    border: none;
+    border-radius: v.$radius-sm;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    @include m.respond-to(v.$bp-tablet) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        min-width: 250px;
+    }
+
+    &:hover {
+        background-color: v.$color-accent-hover;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        transform: translateY(-2px);
+    }
+}
+
+
+
+/* Стилі карток датчиків та статусів для Лабораторної №5 */
+.controls-bar {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.controls-bar select {
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #f1f5f9;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+/* Виправлені стилі для карток датчиків (Лабораторна №5) */
+.sensor-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  border-left: 5px solid transparent;
+  position: relative;
+}
+
+.sensor-card.normal {
+  border-left-color: #10b981;
+}
+
+.sensor-card.warning {
+  border-left-color: #f59e0b;
+}
+
+.sensor-card.critical {
+  border-left-color: #ef4444;
+}
+
+.sensor-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.sensor-card__id {
+  font-weight: 700;
+  color: #38bdf8;
+  font-size: 1.15rem;
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-badge.normal {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+}
+
+.status-badge.warning {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+}
+
+.status-badge.critical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.sensor-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #f1f5f9;
+}
+
+.sensor-card__location,
+.sensor-card__history,
+.sensor-card__battery {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-top: 0.35rem;
+}
+
+.sensor-card__level {
+  margin-top: 0.6rem;
+  font-size: 1.05rem;
+  color: #f1f5f9;
+}
+
+/* Стилі для панелі керування та фільтрів */
+.controls-bar {
+  margin: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.controls-bar select,
+.measurement-panel select {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #f1f5f9;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.measurement-panel {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.feedback-msg {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
